@@ -1,0 +1,106 @@
+﻿@page
+@model Webservice.Pages.MakeBookingModel
+@{
+}
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="~/css/site.css">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>BookAGYM</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/font-awesome.min.css">
+     <link rel="stylesheet" href="css/aos.css">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+
+</head>
+@{
+		string name = "null";
+        name = HttpContext.Session.GetString("AccountName");
+        }
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="Home">BookAGYM</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a asp-page="/ClientPage" class="nav-link smoothScroll">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="BookingPage" class="nav-link smoothScroll">Book An Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Announcements" class="nav-link smoothScroll">Announcements</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#schedule" class="nav-link smoothScroll">About Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#name" class="nav-link smoothScroll">@name</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Home" class="nav-link smoothScroll">Logout</a>
+                    </li>
+
+                    <li class="nav-item">
+                        
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+        <br />
+        <br />
+        <br />
+        <br />
+        <h2>
+            Make Bookings
+        </h2>
+            
+        <h3>
+            Select Date
+        </h3>
+        
+       <form asp-page-handler="DateChange">
+            <input ID="StartDate"  type="date" asp-for="DateUserSelected.Date" class="form-control" asp-format="{0:yyyy-MM-dd}" onchange="this.form.submit();"/>
+        </form>
+        <h3>
+            Select Time
+        </h3>
+        <form method="post">
+        <select asp-for="DateUserSelected.Time" asp-items="Model.Times"></select> 
+        
+            <input type="submit" class="login100-form-btn" value="Book">
+        </form>
+       
+    </body>
+</html>
+

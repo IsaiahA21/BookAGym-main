@@ -1,0 +1,129 @@
+@page
+
+@using Webservice.ContextHelpers
+@using Webservice.DatabaseHelper
+@inject DatabaseContextHelper context
+@model Webservice.Models.Booking
+@{
+}
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="~/css/site.css">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+     <title>BookAGYM</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="css/font-awesome.min.css">
+     <link rel="stylesheet" href="css/aos.css">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+
+</head>
+@{
+		string name = "null";
+        name = HttpContext.Session.GetString("AccountName");
+        }
+<body data-spy="scroll" data-target="#navbarNav" data-offset="50">
+    <!-- MENU BAR -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand" href="Home">BookAGYM</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item">
+                        <a asp-page="/ClientPage" class="nav-link smoothScroll">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="BookingPage" class="nav-link smoothScroll">Book An Appointment</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Announcements" class="nav-link smoothScroll">Announcements</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#schedule" class="nav-link smoothScroll">About Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#name" class="nav-link smoothScroll">@name</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Home" class="nav-link smoothScroll">Logout</a>
+                    </li>
+
+                    <li class="nav-item">
+                        
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <h3>
+            Current Bookings
+        </h3>
+            <table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a >ID</a>
+            </th>
+            <th>
+                <a >Username</a>
+            </th>
+            <th>
+                <a >TimeBooked</a>
+            </th>
+
+                @foreach(var item in Booking_db.getCollection(HttpContext.Session.GetString("AccountName"), context.DBContext))
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Username</td>
+                        <td>@item.TimeBooked</td>
+                        <td>
+                            <a type="submit" asp-action="Cancel"  asp-controller="BookingPageModel" asp-route-id="@item.Id" >Cancel</a>
+                        </td>
+                    </tr>
+                }
+        </tr>
+        </thead>
+    <tbody>
+    </tbody>
+</table>
+        <br />
+        <br />
+        <h3>
+            Manage Booking
+        </h3>
+            <a asp-page="/MakeBooking" class="nav-link smoothScroll">Book</a>
+            <a asp-page="/ChangeBooking" class="nav-link smoothScroll">Change</a>
+    </body>
+</html>

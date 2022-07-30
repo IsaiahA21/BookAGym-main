@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BookAGym-main",
+    "\\BookAGym-main\\Webservice",
+    "\\BookAGym-main\\Webservice\\DatabaseHelper",
+    "\\BookAGym-main\\Webservice\\Models",
+    "\\BookAGym-main\\Webservice\\Pages"
+  ],
+  "SelectedNode": "\\BookAGym-main\\Webservice\\DatabaseHelper\\Announcement_db.cs",
+  "PreviewInSolutionExplorer": false
+}
